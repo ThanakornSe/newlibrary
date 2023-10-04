@@ -5,3 +5,4 @@ plugins {
     id("com.android.library") version "8.1.2" apply false
     `maven-publish`
 }
+

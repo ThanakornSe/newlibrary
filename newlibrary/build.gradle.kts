@@ -33,47 +33,47 @@ android {
     }
 }
 
-publishing {
-    publications {
-        register<MavenPublication>("release") {
-            groupId = "com.thanakornse"
-            artifactId = "newlibrary"
-            version = "0.0.1"
-            //artifact("$buildDir/outputs/aar/Mathlibrary-debug.aar")
-
-            afterEvaluate {
-                from(components["release"])
-            }
-        }
-
-        repositories {
-            maven {
-                name = "newlibrary"
-                url = uri("https://maven.pkg.github.com/ThanakornSe/TestingLibrary")
-                //url = uri("$buildDir/outputs/repo")
-                credentials {
-                    username = "ThanakornSe"
-                    password = "Olympusem5mk2"
-                }
-            }
-
-        }
-    }
-}
-
-//afterEvaluate {
-//    android.libraryVariants.forEach { variant ->
-//        publishing.publications.create<MavenPublication>(variant.name) {
+//publishing {
+//    publications {
+//        register<MavenPublication>("release") {
 //            groupId = "com.thanakornse"
 //            artifactId = "newlibrary"
 //            version = "0.0.1"
 //            //artifact("$buildDir/outputs/aar/Mathlibrary-debug.aar")
 //
-//            from(components.findByName(variant.name))
+//            afterEvaluate {
+//                from(components["release"])
+//            }
 //        }
 //
+//        repositories {
+//            maven {
+//                name = "newlibrary"
+//                url = uri("https://maven.pkg.github.com/ThanakornSe/TestingLibrary")
+//                //url = uri("$buildDir/outputs/repo")
+//                credentials {
+//                    username = "ThanakornSe"
+//                    password = "Olympusem5mk2"
+//                }
+//            }
+//
+//        }
 //    }
 //}
+
+afterEvaluate {
+    android.libraryVariants.forEach { variant ->
+        publishing.publications.create<MavenPublication>(variant.name) {
+            groupId = "com.thanakornse"
+            artifactId = "newlibrary"
+            version = "0.0.1"
+            //artifact("$buildDir/outputs/aar/Mathlibrary-debug.aar")
+
+            from(components.findByName(variant.name))
+        }
+
+    }
+}
 
 dependencies {
     val RETROFIT = "2.9.0"
